@@ -69,4 +69,7 @@ makeself ${MAKESELF_OPTS} ${DIST_DIR} ${run_filename} \
 chmod +x ${run_filename}
 
 # action outputs
+# path for .run file
 echo "run_filename=${run_filename}" >> $GITHUB_OUTPUT
+# path for all binary artifacts
+echo "binary_distro=${DIST_DIR}" >> $GITHUB_OUTPUT

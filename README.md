@@ -52,4 +52,5 @@ Supported Qt version: 6.7.0, with:
 
 ## Outputs
 
-- `run_filename`: The file path of the generated self-extract run file, set `+x` to make it executable.
+- `run_filename`: The path of the generated self-extract run file, set `+x` to make it executable.
+- `binary_distro`: The path of the binary artifacts for distrobution, e.g. create a software package.
