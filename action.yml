@@ -1,5 +1,6 @@
 name: 'Qt6 App Builder'
 description: 'Build a Qt6 Application'
+author: 'Tong Zhang'
 inputs:
   project_file:
     description: 'Project file name'
@@ -7,32 +8,32 @@ inputs:
   app_name:
     description: 'Output app name'
     required: true
-  app_version:
-    description: 'Version of app'
-    required: true
-    default: "not-defined"
-  app_desc:
-    description: 'Description of app'
-    required: true
-    default: 'not-defined'
   exec_names:
     description: 'Executable names'
     required: true
   main_exec:
     description: 'Main executable name'
-    required: true
+    required: false
+    default: 'not-defined'
+  app_version:
+    description: 'Version of app'
+    required: false
+    default: "not-defined"
+  app_desc:
+    description: 'Description of app'
+    required: false
     default: 'not-defined'
   dist_dir:
     description: 'Directory for built artifacts'
-    required: true
+    required: false
     default: 'dist'
   qt_deployer_opts:
     description: 'Options for linuxdeployqt'
-    required: true
+    required: false
     default: '-bundle-non-qt-libs -no-translations'
   makeself_opts:
     description: 'Options for makeself'
-    required: true
+    required: false
     default: '--notemp --nox11 --tar-quietly --xz'
 
 outputs:
@@ -45,10 +46,10 @@ runs:
   args:
     - ${{ inputs.project_file }}
     - ${{ inputs.app_name }}
-    - ${{ inputs.app_version }}
-    - ${{ inputs.app_desc }}
     - ${{ inputs.exec_names }}
     - ${{ inputs.main_exec }}
+    - ${{ inputs.app_version }}
+    - ${{ inputs.app_desc }}
     - ${{ inputs.dist_dir }}
     - ${{ inputs.qt_deployer_opts }}
     - ${{ inputs.makeself_opts }}
