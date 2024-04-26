@@ -8,12 +8,12 @@
 sh -c "git config --global --add safe.directory $PWD"
 
 # Arguments
-PROJ_NAME=$1
+PROJ_FILE=$1
 APP_NAME=$2
-APP_VERSION=$3
-APP_DESC=$4
-EXEC_NAMES=$5
-MAIN_EXEC=$6
+EXEC_NAMES=$3
+MAIN_EXEC=$4
+APP_VERSION=$5
+APP_DESC=$6
 DIST_DIR=$7
 QT_DEPLOYER_OPTS=$8
 MAKESELF_OPTS=$9
@@ -39,10 +39,10 @@ run_filename=${APP_NAME}_${APP_VERSION}.run
 
 cwdir0=`pwd`
 
-echo "Build Qt project: ${PROJ_NAME} as ${APP_NAME}, keep artifacts at ${DIST_DIR} "
+echo "Build Qt project: ${PROJ_FILE} as ${APP_NAME}, keep artifacts at ${DIST_DIR} "
 
 # build
-qmake CONFIG+=release CONFIG+=optimize_full ${PROJ_NAME}
+qmake CONFIG+=release CONFIG+=optimize_full ${PROJ_FILE}
 make -j$(cat /proc/cpuinfo | /bin/grep processor | wc -l)
 
 # generate deployable binaries as a distro
