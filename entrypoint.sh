@@ -40,7 +40,6 @@ run_filename=${APP_NAME}_${APP_VERSION}.run
 cwdir0=`pwd`
 
 echo "Build Qt project: ${PROJ_NAME} as ${APP_NAME}, keep artifacts at ${DIST_DIR} "
-echo "${run_filename}" >> $GITHUB_OUTPUT
 
 # build
 qmake CONFIG+=release CONFIG+=optimize_full ${PROJ_NAME}
@@ -67,3 +66,6 @@ chmod +x run_app.sh
 cd ${cwdir0}
 makeself ${MAKESELF_OPTS} ${DIST_DIR} ${run_filename} ${APP_DESC} ./run_app.sh
 chmod +x ${run_filename}
+
+# action outputs
+echo "run_filename=${run_filename}" >> $GITHUB_OUTPUT
