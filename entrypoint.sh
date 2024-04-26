@@ -19,6 +19,9 @@ MAKESELF_OPTS=$9
 # if APP_DESC is not-defined, set it "A Qt app (APP_NAME) built with qt-builder action"
 [[ $APP_DESC == "not-defined" ]] && APP_DESC="A Qt app (${APP_NAME}) built with qt-builder action"
 
+echo "MAIN_EXEC: " $MAIN_EXEC
+echo "APP_DESC: " $APP_DESC
+
 cwdir0=`pwd`
 
 echo "Build Qt project: ${PROJ_NAME} as ${APP_NAME}, keep artifacts at ${DIST_DIR} "
