@@ -1,15 +1,26 @@
 name: 'Qt6 App Builder'
 description: 'Build a Qt6 Application'
 inputs:
-  project_name:
+  project_file:
     description: 'Project file name'
     required: true
   app_name:
     description: 'Output app name'
     required: true
+  app_version:
+    description: 'Version of app'
+    required: true
+  app_desc:
+    description: 'Description of app'
+    required: true
+    default: 'not-defined'
   exec_names:
     description: 'Executable names'
     required: true
+  main_exec:
+    description: 'Main executable name'
+    required: true
+    default: 'not-defined'
   dist_dir:
     description: 'Directory for built artifacts'
     required: true
@@ -18,6 +29,10 @@ inputs:
     description: 'Options for linuxdeployqt'
     required: true
     default: '-bundle-non-qt-libs -no-translations'
+  makeself_opts:
+    description: 'Options for makeself'
+    required: true
+    default: '--notemp --nox11 --tar-quietly --xz'
 
 outputs:
   time: # id of output
@@ -27,8 +42,12 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.project_name }}
+    - ${{ inputs.project_file }}
     - ${{ inputs.app_name }}
+    - ${{ inputs.app_version }}
+    - ${{ inputs.app_desc }}
     - ${{ inputs.exec_names }}
+    - ${{ inputs.main_exec }}
     - ${{ inputs.dist_dir }}
     - ${{ inputs.qt_deployer_opts }}
+    - ${{ inputs.makeself_opts }}
