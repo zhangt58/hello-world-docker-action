@@ -10,6 +10,7 @@ inputs:
   app_version:
     description: 'Version of app'
     required: true
+    default: "not-defined"
   app_desc:
     description: 'Description of app'
     required: true

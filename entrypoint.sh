@@ -18,9 +18,18 @@ MAKESELF_OPTS=$9
 [[ $MAIN_EXEC == "not-defined" ]] && MAIN_EXEC=$(echo ${EXEC_NAMES} | cut -d' ' -f1)
 # if APP_DESC is not-defined, set it "A Qt app (APP_NAME) built with qt-builder action"
 [[ $APP_DESC == "not-defined" ]] && APP_DESC="A Qt app (${APP_NAME}) built with qt-builder action"
+# if APP_VERSION is not-defined, get the sha1 of the last commit or the tag
+if [[ $APP_VERSION == "not-defined" ]]; then
+    # sha1
+    sha1full=$(git rev-parse HEAD)
+    # test if a tag is available
+    tag=$(git tag --contains ${sha1full})
+    [ -n "$tag" ] && APP_VERSION=${tag} || APP_VERSION=${sha1full::6}
+fi
 
 echo "MAIN_EXEC: " $MAIN_EXEC
 echo "APP_DESC: " $APP_DESC
+echo "APP_VERSION: " $APP_VERSION
 
 cwdir0=`pwd`
 
