@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Build a Qt project into deployable binaries.
 #
@@ -15,9 +15,9 @@ QT_DEPLOYER_OPTS=$8
 MAKESELF_OPTS=$9
 
 # if MAIN_EXEC is not-defined, set it the first word of EXEC_NAMES
-[ $MAIN_EXEC == "not-defined" ] && MAIN_EXEC=$(echo $EXEC_NAMES | cut -d' ' -f1)
+[[ $MAIN_EXEC == "not-defined" ]] && MAIN_EXEC=$(echo ${EXEC_NAMES} | cut -d' ' -f1)
 # if APP_DESC is not-defined, set it "A Qt app (APP_NAME) built with qt-builder action"
-[ $APP_DESC == "not-defined" ] && APP_DESC="A Qt app (${APP_NAME}) built with qt-builder action"
+[[ $APP_DESC == "not-defined" ]] && APP_DESC="A Qt app (${APP_NAME}) built with qt-builder action"
 
 cwdir0=`pwd`
 
