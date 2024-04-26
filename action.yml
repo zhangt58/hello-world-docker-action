@@ -36,8 +36,8 @@ inputs:
     default: '--notemp --nox11 --tar-quietly --xz'
 
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  run_filename:
+    description: 'The generated self-extract run file'
 
 runs:
   using: 'docker'

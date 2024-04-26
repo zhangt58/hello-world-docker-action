@@ -31,10 +31,12 @@ echo "MAIN_EXEC: " $MAIN_EXEC
 echo "APP_DESC: " $APP_DESC
 echo "APP_VERSION: " $APP_VERSION
 
+run_filename=${APP_NAME}_${APP_VERSION}.run
+
 cwdir0=`pwd`
 
 echo "Build Qt project: ${PROJ_NAME} as ${APP_NAME}, keep artifacts at ${DIST_DIR} "
-echo "time=$(date)" >> $GITHUB_OUTPUT
+echo "${run_filename}" >> $GITHUB_OUTPUT
 
 # build
 qmake CONFIG+=release CONFIG+=optimize_full ${PROJ_NAME}
@@ -58,7 +60,6 @@ EOF
 chmod +x run_app.sh
 
 # generate self-extractable run file
-run_filename=${APP_NAME}_${APP_VERSION}.run
 cd ${cwdir0}
 makeself ${MAKESELF_OPTS} ${DIST_DIR} ${run_filename} ${APP_DESC} ./run_app.sh
 chmod +x ${run_filename}
