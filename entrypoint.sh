@@ -64,7 +64,8 @@ chmod +x run_app.sh
 
 # generate self-extractable run file
 cd ${cwdir0}
-makeself ${MAKESELF_OPTS} ${DIST_DIR} ${run_filename} ${APP_DESC} ./run_app.sh
+makeself ${MAKESELF_OPTS} ${DIST_DIR} ${run_filename} \
+    "${APP_DESC}" ./run_app.sh
 chmod +x ${run_filename}
 
 # action outputs
