@@ -3,6 +3,10 @@
 # Build a Qt project into deployable binaries.
 #
 
+# fix:
+# fatal: detected dubious ownership in repository at '/github/workspace'
+sh -c "git config --global --add safe.directory $PWD"
+
 # Arguments
 PROJ_NAME=$1
 APP_NAME=$2
