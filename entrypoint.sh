@@ -19,6 +19,8 @@ MAKESELF_OPTS=$9
 # if APP_DESC is not-defined, set it "A Qt app (APP_NAME) built with qt-builder action"
 [ $APP_DESC == "not-defined" ] && APP_DESC="A Qt app (${APP_NAME}) built with qt-builder action"
 
+cwdir0=`pwd`
+
 echo "Build Qt project: ${PROJ_NAME} as ${APP_NAME}, keep artifacts at ${DIST_DIR} "
 echo "time=$(date)" >> $GITHUB_OUTPUT
 
@@ -45,5 +47,6 @@ chmod +x run_app.sh
 
 # generate self-extractable run file
 run_filename=${APP_NAME}_${APP_VERSION}.run
+cd ${cwdir0}
 makeself ${MAKESELF_OPTS} ${DIST_DIR} ${run_filename} ${APP_DESC} ./run_app.sh
 chmod +x ${run_filename}
