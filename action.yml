@@ -14,15 +14,15 @@ inputs:
   main_exec:
     description: 'Main executable name'
     required: false
-    default: 'not-defined'
+    default: ''
   app_version:
     description: 'Version of app'
     required: false
-    default: "not-defined"
+    default: ''
   app_desc:
     description: 'Description of app'
     required: false
-    default: 'not-defined'
+    default: ''
   dist_dir:
     description: 'Directory for built artifacts'
     required: false

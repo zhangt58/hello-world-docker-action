@@ -18,12 +18,12 @@ DIST_DIR=$7
 QT_DEPLOYER_OPTS=$8
 MAKESELF_OPTS=$9
 
-# if MAIN_EXEC is not-defined, set it the first word of EXEC_NAMES
-[[ $MAIN_EXEC == "not-defined" ]] && MAIN_EXEC=$(echo ${EXEC_NAMES} | cut -d' ' -f1)
-# if APP_DESC is not-defined, set it "A Qt app (APP_NAME) built with qt-builder action"
-[[ $APP_DESC == "not-defined" ]] && APP_DESC="A Qt app (${APP_NAME}) built with qt-builder action"
+# if MAIN_EXEC is '', set it the first word of EXEC_NAMES
+[[ -z ${MAIN_EXEC} ]] && MAIN_EXEC=$(echo ${EXEC_NAMES} | cut -d' ' -f1)
+# if APP_DESC is '', set it "A Qt app (APP_NAME) built with qt-builder action"
+[[ -z ${APP_DESC} ]] && APP_DESC="A Qt app (${APP_NAME}) built with qt-app-builder action"
 # if APP_VERSION is not-defined, get the sha1 of the last commit or the tag
-if [[ $APP_VERSION == "not-defined" ]]; then
+if [[ -z ${APP_VERSION} ]]; then
     # sha1
     sha1full=$(git rev-parse HEAD)
     # test if a tag is available
