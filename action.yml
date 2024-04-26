@@ -1,15 +1,21 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Qt6 App Builder'
+description: 'Build a Qt6 Application'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  project_name:
+    description: 'Project file name'
     required: true
-    default: 'World'
+  app_name:
+    description: 'Output app name'
+    required: true
+    # default: 'World'
+
 outputs:
   time: # id of output
     description: 'The time we greeted you'
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.project_name }}
+    - ${{ inputs.app_name }}
