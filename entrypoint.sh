@@ -73,3 +73,7 @@ chmod +x ${run_filename}
 echo "run_filename=${run_filename}" >> $GITHUB_OUTPUT
 # path for all binary artifacts
 echo "binary_distro=${DIST_DIR}" >> $GITHUB_OUTPUT
+# string of app name
+echo "app_name=${APP_NAME}" >> $GITHUB_OUTPUT
+# string of app version
+echo "app_version=${APP_VERSION}" >> $GITHUB_OUTPUT
