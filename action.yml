@@ -39,10 +39,20 @@ inputs:
     description: 'Extra required packages from APT'
     required: false
     default: ''
+  post_dist:
+    description: 'Scripts to run in the "dist_dir" after binary distro is generated'
+    required: false
+    default: ''
 
 outputs:
   run_filename:
     description: 'The generated self-extract run file'
+  binary_distro:
+    description: 'The path for all the output binar artifacts'
+  app_name:
+    description: 'The name of the app'
+  app_version:
+    description: 'The version of the app'
 
 runs:
   using: 'docker'
@@ -58,3 +68,4 @@ runs:
     - ${{ inputs.qt_deployer_opts }}
     - ${{ inputs.makeself_opts }}
     - ${{ inputs.extra_requires }}
+    - ${{ inputs.post_dist }}

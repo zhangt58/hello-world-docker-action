@@ -4,7 +4,7 @@
 #
 set -Eeuo pipefail
 
-# Arguments
+# Input arguments
 PROJ_FILE=$1
 APP_NAME=$2
 EXEC_NAMES=$3
@@ -14,15 +14,15 @@ APP_DESC=$6
 DIST_DIR=$7
 QT_DEPLOYER_OPTS=$8
 MAKESELF_OPTS=$9
-EXTRA_REQUIRES=${10}
+EXTRA_REQUIRES="${10}"
+POST_DIST="${11}"
 
+# install extra required packages via apt if set
 dpkg-query -l git > /dev/null 2>&1 || EXTRA_REQUIRES+=" git"
 EXTRA_REQUIRES=$(echo ${EXTRA_REQUIRES} | xargs -n1 | sort -u | xargs)
-# install extra required package via apt if set
 [[ -n ${EXTRA_REQUIRES} ]] && apt-get update && apt-get install -y ${EXTRA_REQUIRES}
 
-# fix:
-# fatal: detected dubious ownership in repository at '/github/workspace'
+# fix: "fatal: detected dubious ownership in repository at '/github/workspace'"
 sh -c "git config --global --add safe.directory $PWD"
 
 # if MAIN_EXEC is '', set it the first word of EXEC_NAMES
@@ -68,6 +68,9 @@ cwdir=\`dirname \$0\`
 \${cwdir}/${MAIN_EXEC}
 EOF
 chmod +x run_app.sh
+
+# executing scripts after binary distro dir is generated
+[[ -n "${POST_DIST}" ]] && eval "${POST_DIST}"
 
 # generate self-extractable run file
 cd ${cwdir0}
