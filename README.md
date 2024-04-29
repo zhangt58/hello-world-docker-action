@@ -12,7 +12,7 @@ Supported Qt version: 6.7.0, with:
 # Usage
 
 ```shell
-- uses: zhangt58/qt-app-builder@v1
+- uses: zhangt58/qt-app-builder@v1.3
   with:
     # **Required**, Qt project file name
     project_file: <myproj.pro>
@@ -45,12 +45,26 @@ Supported Qt version: 6.7.0, with:
     # Defaults: '-bundle-non-qt-libs -no-translations'
     qt_deployer_opts: <linuxdeployqt-options>
 
-    # **options**, the options for _makeself_
+    # **Optional**, the options for _makeself_
     # Defaults: '--notemp --nox11 --tar-quietly --xz'
     makeself_opts: <makeself-options>
+
+    # **Optional**, the extra required packages installed via apt
+    # Defaults: ''
+    extra_requires: ''
+
+    # **Optional**, scripts to execute from the _dist_dir_ after generated binary distro
+    # Defaults: ''
+    # Hint: Pass multiple lines of scripts after `|`: e.g.
+    # post_dist: |
+    #   1st command line
+    #   2nd command line
+    post_dist: ''
 ```
 
 ## Outputs
 
 - `run_filename`: The path of the generated self-extract run file, set `+x` to make it executable.
 - `binary_distro`: The path of the binary artifacts for distrobution, e.g. create a software package.
+- `app_name`: The name string of the app.
+- `app_version`: the version string of the app.
