@@ -2,10 +2,7 @@
 #
 # Build a Qt project into deployable binaries.
 #
-
-# fix:
-# fatal: detected dubious ownership in repository at '/github/workspace'
-sh -c "git config --global --add safe.directory $PWD"
+set -Eeuo pipefail
 
 # Arguments
 PROJ_FILE=$1
@@ -17,6 +14,16 @@ APP_DESC=$6
 DIST_DIR=$7
 QT_DEPLOYER_OPTS=$8
 MAKESELF_OPTS=$9
+EXTRA_REQUIRES=${10}
+
+dpkg-query -l git > /dev/null 2>&1 || EXTRA_REQUIRES+=" git"
+EXTRA_REQUIRES=$(echo ${EXTRA_REQUIRES} | xargs -n1 | sort -u | xargs)
+# install extra required package via apt if set
+[[ -n ${EXTRA_REQUIRES} ]] && apt-get update && apt-get install -y ${EXTRA_REQUIRES}
+
+# fix:
+# fatal: detected dubious ownership in repository at '/github/workspace'
+sh -c "git config --global --add safe.directory $PWD"
 
 # if MAIN_EXEC is '', set it the first word of EXEC_NAMES
 [[ -z ${MAIN_EXEC} ]] && MAIN_EXEC=$(echo ${EXEC_NAMES} | cut -d' ' -f1)
