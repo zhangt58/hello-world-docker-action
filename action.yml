@@ -35,6 +35,10 @@ inputs:
     description: 'Options for makeself'
     required: false
     default: '--notemp --nox11 --tar-quietly --xz'
+  extra_requires:
+    description: 'Extra required packages from APT'
+    required: false
+    default: ''
 
 outputs:
   run_filename:
@@ -53,3 +57,4 @@ runs:
     - ${{ inputs.dist_dir }}
     - ${{ inputs.qt_deployer_opts }}
     - ${{ inputs.makeself_opts }}
+    - ${{ inputs.extra_requires }}
